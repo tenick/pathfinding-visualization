@@ -11,7 +11,19 @@ canvas.height = CVS_HEIGHT;
 var visualizer = new PathFindingVisualizer(50, 50, ctx);
 visualizer.draw();
 
+var algorithm = document.getElementById("algorithm");
 function execute(){
+    let algo = null;
+    switch (algorithm.value){
+        case "dfs":
+            algo = new DFS();
+            break;
+        case "bfs":
+            algo = new BFS();
+            break;
+    }
+
+    visualizer.algorithm = algo;
     visualizer.execute();
 }
 function update(){

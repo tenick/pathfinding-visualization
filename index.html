@@ -24,6 +24,13 @@
     <label for="gridSize">Grid Size</label><br>
     <input type="number" id="gridSize" min="2" max="1000" value="10"><input type="button" value="update" onclick="update()"><br>
 
+    <select name="algorithm" id="algorithm">
+        <option value="dfs">Depth First Search (DFS)</option>
+        <option value="bfs">Breadth First Search (BFS)</option>
+        <option value="dijkstra">Dijkstra's Algorithm</option>
+        <option value="astar">A*</option>
+    </select>
+
     <input type="button" id="execute" value="Execute" onclick="execute();">
 
 
@@ -32,7 +39,6 @@
     </div>
 
 
-    <script src="./queue.js"></script>
     <script src="./pathFindingVisualizer.js"></script>
     <script src="./script.js"></script>
 </body>
