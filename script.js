@@ -1,0 +1,91 @@
+var canvas = document.getElementById("cvs");
+var ctx = canvas.getContext("2d");
+
+var CVS_WIDTH = 700;
+var CVS_HEIGHT = 700;
+
+canvas.width = CVS_WIDTH;
+canvas.height = CVS_HEIGHT;
+
+
+var visualizer = new PathFindingVisualizer(50, 50, ctx);
+visualizer.draw();
+
+function execute(){
+    visualizer.execute();
+}
+function update(){
+    let newGridSize = parseInt(document.querySelector("input[type='number']").value);
+    visualizer = new PathFindingVisualizer(newGridSize, newGridSize, ctx);
+    visualizer.draw();
+}
+
+// add canvas events
+var editMode = false;
+var editType = document.querySelector('input[type="radio"]:checked').value;
+
+window.addEventListener("mousedown", function(e) {
+    editMode = true;
+    editType = document.querySelector('input[type="radio"]:checked').value;
+}, true);
+
+window.addEventListener("mouseup", function(e) {
+    editMode = false;
+}, true);
+
+canvas.addEventListener("mousemove", function(e) {
+    if (editMode) editGrid(e);
+}, true);
+canvas.addEventListener("mousedown", function(e) {
+    if (editMode) editGrid(e);
+}, true);
+
+function editGrid(e){
+    let x = e.offsetX;
+    let y = e.offsetY;
+
+    let CELL_WIDTH =  CVS_WIDTH / visualizer.grid.length;
+    let CELL_HEIGHT = CVS_HEIGHT / visualizer.grid[0].length;
+
+    let r = Math.floor(x / CELL_WIDTH);
+    let c = Math.floor(y / CELL_HEIGHT);
+
+    let newCellVal = GridObject.EMPTY;
+    switch(editType){
+        case "Start Node":
+            if (visualizer.grid[r][c] != GridObject.EMPTY)
+                return;
+
+            // remove previous start node
+            visualizer.grid[visualizer.startNode[0]][visualizer.startNode[1]] = GridObject.EMPTY;
+            visualizer.startNode = [r, c];
+
+            newCellVal = GridObject.START;
+            break;
+        case "End Node":
+            if (visualizer.grid[r][c] != GridObject.EMPTY)
+                return;
+
+            // remove previous end node
+            visualizer.grid[visualizer.endNode[0]][visualizer.endNode[1]] = GridObject.EMPTY;
+            visualizer.endNode = [r, c];
+
+            newCellVal = GridObject.END;
+            break;
+        case "Draw Wall":
+            if (visualizer.grid[r][c] != GridObject.EMPTY)
+                return;
+
+            newCellVal = GridObject.WALL;
+            break;
+        case "Erase Wall":
+            if (visualizer.grid[r][c] != GridObject.WALL)
+                return;
+
+            newCellVal = GridObject.EMPTY;
+            break;
+    }
+
+    visualizer.grid[r][c] = newCellVal;
+    visualizer.draw();
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <input type="radio" id="startNode" name="operation" value="Start Node">
+    <label for="startNode">Start Node</label><br>
+
+    <input type="radio" id="endNode" name="operation" value="End Node">
+    <label for="endNode">End Node</label><br>
+
+    <input type="radio" id="drawWall" name="operation" checked value="Draw Wall">
+    <label for="drawWall">Draw Wall</label><br>
+
+    <input type="radio" id="eraseWall" name="operation" value="Erase Wall">
+    <label for="eraseWall">Erase Wall</label><br>
+
+
+    <label for="gridSize">Grid Size</label><br>
+    <input type="number" id="gridSize" min="2" max="1000" value="10"><input type="button" value="update" onclick="update()"><br>
+
+    <input type="button" id="execute" value="Execute" onclick="execute();">
+
+
+    <div>
+        <canvas id="cvs"></canvas>
+    </div>
+
+
+    <script src="./queue.js"></script>
+    <script src="./pathFindingVisualizer.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
