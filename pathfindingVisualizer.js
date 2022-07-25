@@ -79,7 +79,7 @@ class PathFindingVisualizer {
 }
 
 class DFS {
-    execute(grid, startNode, endNode, ctx){
+    async execute(grid, startNode, endNode, ctx){
         let reached_end = false;
         let dr = [-1, 1, 0, 0];
         let dc = [0, 0, 1, -1];
@@ -107,7 +107,7 @@ class DFS {
         let stack = [startNode];
 
         while (stack.length > 0) {
-            let currentNode = stack.pop();
+            let currentNode = stack[stack.length - 1];
 
             let CELL_WIDTH =  700 / grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
             let CELL_HEIGHT = 700 / grid.length;
@@ -127,10 +127,11 @@ class DFS {
                 break;
             }
 
-
+            let found = false;
             for (let i = 0; i < 4; i++){
                 let rr = currentNode[0] + dr[i];
                 let cc = currentNode[1] + dc[i];
+
 
                 // out of bounds check
                 if (rr < 0 || cc < 0) continue;
@@ -140,10 +141,17 @@ class DFS {
                 if (visited[rr][cc]) continue;
                 if (grid[rr][cc] == GridObject.WALL) continue;
 
+                found = true;
                 stack.push([rr, cc]);
                 visited[rr][cc] = true;
                 prevNode[rr][cc] = currentNode;
+                break;
             }
+
+            if (!found)
+                stack.pop();
+
+            await new Promise(r => setTimeout(r, 1));
         }
 
 
@@ -168,7 +176,7 @@ class DFS {
 }
 
 class BFS {
-    execute(grid, startNode, endNode, ctx){
+    async execute(grid, startNode, endNode, ctx){
         let reached_end = false;
         let dr = [-1, 1, 0, 0];
         let dc = [0, 0, 1, -1];
@@ -239,6 +247,8 @@ class BFS {
                 visited[rr][cc] = true;
                 prevNode[rr][cc] = currentNode;
             }
+
+            await new Promise(r => setTimeout(r, 10));
         }
 
         if (reached_end){
