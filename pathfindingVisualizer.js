@@ -151,7 +151,7 @@ class DFS {
             if (!found)
                 stack.pop();
 
-            await new Promise(r => setTimeout(r, 1));
+            await new Promise(r => setTimeout(r, 5));
         }
 
 
