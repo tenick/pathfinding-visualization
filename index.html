@@ -5,50 +5,86 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title>Pathdinding Algorithm Visualizer</title>
 </head>
 <body>
-    <input type="radio" id="startNode" name="operation" value="Start Node">
-    <label for="startNode">Start Node</label><br>
+    <section class="hero is-link has-text-centered p-4">
+        <p class="title">Pathfinding Algorithm Visualizer</p>
+        <p class="subtitle">Explore the pathfinding algorithms using these functions!</p>
+    </section>
+    <div class="columns has-text-centered">
+        <div class="column is-3">
+            <section class="hero is-success has-text-centered">
+                <div class="hero-body p-3">
+                    <div class="container">
+                        <label class="radio" for="startNode">
+                            <input type="radio" id="startNode" name="operation" value="Start Node">
+                            Start Node
+                        </label>
+        
+                        <label class="radio" for="endNode">
+                            <input type="radio" id="endNode" name="operation" value="End Node">
+                            End Node
+                        </label>
+        
+                        <label class="radio" for="drawWall">
+                            <input type="radio" id="drawWall" name="operation" checked value="Draw Wall">
+                            Draw Wall
+                        </label>
+        
+                        <label class="radio" for="eraseWall">
+                            <input type="radio" id="eraseWall" name="operation" value="Erase Wall">
+                            Erase Wall
+                        </label> 
+                    </div>
+                </div>
+            <section>
+            <section class="hero is-info has-text-centered">
+                <div class="container pt-2">
+                    <h1 class="h1">Grid Size</h1>
+                    <input class="input" type="number" id="gridSize" min="2" max="1000" value="10">
+                </div>
+                <div class="hero-body p-3">
+                    <div class="select">
+                        <select name="algorithm" id="algorithm">
+                            <option value="dfs">Depth First Search (DFS)</option>
+                            <option value="bfs">Breadth First Search (BFS)</option>
+                            <option value="dijkstra">Dijkstra's Algorithm</option>
+                            <option value="astar">A*</option>
+                        </select>
+                    </div>
 
-    <input type="radio" id="endNode" name="operation" value="End Node">
-    <label for="endNode">End Node</label><br>
+                    <button class="button is-link" value="update" onclick="update()">Update</button>
 
-    <input type="radio" id="drawWall" name="operation" checked value="Draw Wall">
-    <label for="drawWall">Draw Wall</label><br>
+                    <button class="button is-danger is-medium column is-fullwidth mt-3 mb-3" type="button" id="execute" value="Execute" onclick="execute();">EXECUTE</button>
 
-    <input type="radio" id="eraseWall" name="operation" value="Erase Wall">
-    <label for="eraseWall">Erase Wall</label><br>
-
-
-    <label for="gridSize">Grid Size</label><br>
-    <input type="number" id="gridSize" min="2" max="1000" value="10"><input type="button" value="update" onclick="update()"><br>
-
-    <select name="algorithm" id="algorithm">
-        <option value="dfs">Depth First Search (DFS)</option>
-        <option value="bfs">Breadth First Search (BFS)</option>
-        <option value="dijkstra">Dijkstra's Algorithm</option>
-        <option value="astar">A*</option>
-    </select>
-
-    <input type="button" id="execute" value="Execute" onclick="execute();">
-
-
-    <div>
-        <canvas id="cvs"></canvas>
+                </div>
+            </section>
+            
+            <section class="hero is-dark has-text-centered p-4">
+                <div class="buttons is-centered">
+                    <div class="field is-horizontal">
+                        <h1 class="h1 p-2">Speed (ms)</h1>
+                        <input class="input column is-4" type="number" id="speed" min="1" max="100" value="10">
+                    </div>
+                    <div class="buttons is-centered">
+                        <input type="range">
+                    </div>
+                </div>
+        
+                <div class="buttons is-centered">
+                    <button class="button is-light" type="button" value="Start Over">Start Over</button>
+                    <button class="button is-light" type="button" value="Step Backward">Step Backward</button>
+                    <button class="button is-light" type="button" value="Play">Play</button>
+                    <button class="button is-light" type="button" value="End">End</button>
+                </div>
+            </section>
+        </div>
+        <div class="column">
+            <canvas id="cvs"></canvas>
+        </div>
     </div>
-
-    <input type="number" id="speed" min="1" max="100" value="10">
-    <label for="speed">Speed (ms)</label><br>
-
-    <input type="range">
-    <input type="button" value="Start Over">
-    <input type="button" value="Step Backward">
-    <input type="button" value="Play">
-    <input type="button" value="Step Forward">
-    <input type="button" value="End">
-
-    
 
     <script src="./pathFindingVisualizer.js"></script>
     <script src="./script.js"></script>
