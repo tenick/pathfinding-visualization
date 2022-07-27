@@ -42,24 +42,23 @@ class PathFindingVisualizer {
         this.grid[0][0] = 2;
         this.grid[row - 1][column - 1] = 3;
 
-        this.algorithm = new DFS();
-        this.result = [];
+        this.algorithm = new DFS(this, this.startNode, this.endNode, this.grid);
     }
     
-    execute(){
-        this.result = this.algorithm.execute(this.grid, this.startNode, this.endNode, this.ctx);
+    async execute(){
+        await this.algorithm.execute();
     }
 
-    draw(){
-        let CELL_WIDTH =  700 / this.grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
-        let CELL_HEIGHT = 700 / this.grid.length;
+    draw(grid=this.grid){
+        let CELL_WIDTH =  700 / grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
+        let CELL_HEIGHT = 700 / grid.length;
 
         this.ctx.strokeStyle = "#AAAAFF";
 
 
-        for (let i = 0; i < this.grid.length; i++){
-            for (let j = 0; j < this.grid[i].length; j++){
-                let cell = this.grid[i][j];
+        for (let i = 0; i < grid.length; i++){
+            for (let j = 0; j < grid[i].length; j++){
+                let cell = grid[i][j];
 
                 if (cell == GridObject.EMPTY) // empty
                     this.ctx.fillStyle = "#eee";
@@ -79,38 +78,50 @@ class PathFindingVisualizer {
 }
 
 class DFS {
-    async execute(grid, startNode, endNode, ctx){
+    constructor(visualizer, grid, startNode, endNode){
+        this.visualizer = visualizer;
+        this.ctx = visualizer.ctx;
+        this.grid = grid;
+        this.startNode = startNode;
+        this.endNode = endNode;
+        this.pathFromStartToEnd = null;
+        this.frames = [];
+    }
+
+    async execute(){
+        let ctx = this.visualizer.ctx;
+
         let reached_end = false;
         let dr = [-1, 1, 0, 0];
         let dc = [0, 0, 1, -1];
 
         // false-initialized visited grid, then add start node as visited
-        let visited = new Array(grid.length);
+        let visited = new Array(this.grid.length);
         for (let i = 0; i < visited.length; i++){
-            let a = new Array(grid[0].length);
+            let a = new Array(this.grid[0].length);
             for (let j=0; j<a.length; ++j) a[j] = false;
             visited[i] = a;
         }
-        visited[startNode[0]][startNode[1]] = true;
+        visited[this.startNode[0]][this.startNode[1]] = true;
 
 
         // null-initialized prevNode grid, then add start node as its own parent
-        let prevNode = new Array(grid.length);
+        let prevNode = new Array(this.grid.length);
         for (let i = 0; i < prevNode.length; i++){
-            let a = new Array(grid[0].length);
+            let a = new Array(this.grid[0].length);
             for (let j=0; j<a.length; ++j) a[j] = null;
             prevNode[i] = a;
         }
-        prevNode[startNode[0]][startNode[1]] = startNode;
+        prevNode[this.startNode[0]][this.startNode[1]] = this.startNode;
 
         // initialize stack
-        let stack = [startNode];
+        let stack = [this.startNode];
 
         while (stack.length > 0) {
             let currentNode = stack[stack.length - 1];
 
-            let CELL_WIDTH =  700 / grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
-            let CELL_HEIGHT = 700 / grid.length;
+            let CELL_WIDTH =  700 / this.grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
+            let CELL_HEIGHT = 700 / this.grid.length;
 
             ctx.strokeStyle = "#AAAAFF";
 
@@ -122,7 +133,7 @@ class DFS {
 
 
             // check if current node reached end
-            if (currentNode[0] == endNode[0] && currentNode[1] == endNode[1]){
+            if (currentNode[0] == this.endNode[0] && currentNode[1] == this.endNode[1]){
                 reached_end = true;
                 break;
             }
@@ -135,11 +146,11 @@ class DFS {
 
                 // out of bounds check
                 if (rr < 0 || cc < 0) continue;
-                if (rr >= grid.length || cc >= grid[0].length) continue;
+                if (rr >= this.grid.length || cc >= this.grid[0].length) continue;
 
                 // visited / wall check
                 if (visited[rr][cc]) continue;
-                if (grid[rr][cc] == GridObject.WALL) continue;
+                if (this.grid[rr][cc] == GridObject.WALL) continue;
 
                 found = true;
                 stack.push([rr, cc]);
@@ -156,10 +167,10 @@ class DFS {
 
 
         if (reached_end){
-            let currNode = endNode;
-            while (currNode != startNode){
-                let CELL_WIDTH =  700 / grid[0].length; // IMPORTANTTTT CHANGE DA 1000  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
-                let CELL_HEIGHT = 700 / grid.length;
+            let currNode = this.endNode;
+            while (currNode != this.startNode){
+                let CELL_WIDTH =  700 / this.grid[0].length; // IMPORTANTTTT CHANGE DA 1000  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
+                let CELL_HEIGHT = 700 / this.grid.length;
 
                 ctx.strokeStyle = "#AAAAFF";
 
@@ -169,50 +180,81 @@ class DFS {
                 ctx.fillRect(currNode[0] * CELL_WIDTH, currNode[1] * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
 
                 currNode = prevNode[currNode[0]][currNode[1]];
+
+                await new Promise(r => setTimeout(r, 5));
             }
             alert("ending found!");
         }
     }
 }
 
+// BFS playback data structure:
+/* { 
+    grid: grid (required), 
+    startNode: startNode (required), 
+    endNode: endNode (required), 
+    pathFromStartToEnd: [coords1, coords2, ...], // (nullable, null = !reached_end) 
+    frames: [{ // the actual frames, drawn over the grid, this.length = no. of frames
+        visitedArray: [[true/false, ...], [true/false, ...], ...], // current status of the visited array
+        operation: string, // name of the operation
+        operation_description: string, // description of the operation
+        coordinates: [], // the coordinates affected currently in the grid
+        color: [] // color of each coordinate, coordinates.length == color.length
+    }, {...}, ...]
+} 
+*/
+
 class BFS {
-    async execute(grid, startNode, endNode, ctx){
+    constructor(visualizer, grid, startNode, endNode){
+        this.visualizer = visualizer;
+        this.ctx = this.visualizer.ctx;
+        this.grid = grid;
+        this.startNode = startNode;
+        this.endNode = endNode;
+        this.pathFromStartToEnd = null;
+        this.frames = [];
+    }
+    async execute(){
+        let ctx = this.visualizer.ctx;
+
         let reached_end = false;
         let dr = [-1, 1, 0, 0];
         let dc = [0, 0, 1, -1];
 
         // false-initialized visited grid, then add start node as visited
-        let visited = new Array(grid.length);
+        let visited = new Array(this.grid.length);
         for (let i = 0; i < visited.length; i++){
-            let a = new Array(grid[0].length);
+            let a = new Array(this.grid[0].length);
             for (let j=0; j<a.length; ++j) a[j] = false;
             visited[i] = a;
         }
-        visited[startNode[0]][startNode[1]] = true;
+        this.frames.push(JSON.parse(JSON.stringify(visited)));
+        visited[this.startNode[0]][this.startNode[1]] = true;
+        this.frames.push(JSON.parse(JSON.stringify(visited)));
 
 
         // null-initialized prevNode grid, then add start node as its own parent
-        let prevNode = new Array(grid.length);
+        let prevNode = new Array(this.grid.length);
         for (let i = 0; i < prevNode.length; i++){
-            let a = new Array(grid[0].length);
+            let a = new Array(this.grid[0].length);
             for (let j=0; j<a.length; ++j) a[j] = null;
             prevNode[i] = a;
         }
-        prevNode[startNode[0]][startNode[1]] = startNode;
+        prevNode[this.startNode[0]][this.startNode[1]] = this.startNode;
         
 
         // initialize queue
-        let queue = [startNode];
+        let queue = [this.startNode];
         
-        ctx.globalAlpha = 0.5;
+        //ctx.globalAlpha = 0.5;
 
         // BFS
         while (queue.length > 0) {
             let currentNode = queue.shift();
 
 
-            let CELL_WIDTH =  700 / grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
-            let CELL_HEIGHT = 700 / grid.length;
+            let CELL_WIDTH =  700 / this.grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
+            let CELL_HEIGHT = 700 / this.grid.length;
 
             ctx.strokeStyle = "#AAAAFF";
 
@@ -224,7 +266,7 @@ class BFS {
 
 
             // check if current node reached end
-            if (currentNode[0] == endNode[0] && currentNode[1] == endNode[1]){
+            if (currentNode[0] == this.endNode[0] && currentNode[1] == this.endNode[1]){
                 reached_end = true;
                 break;
             }
@@ -237,25 +279,27 @@ class BFS {
 
                 // out of bounds check
                 if (rr < 0 || cc < 0) continue;
-                if (rr >= grid.length || cc >= grid[0].length) continue;
+                if (rr >= this.grid.length || cc >= this.grid[0].length) continue;
 
                 // visited / wall check
                 if (visited[rr][cc]) continue;
-                if (grid[rr][cc] == GridObject.WALL) continue;
+                if (this.grid[rr][cc] == GridObject.WALL) continue;
 
                 queue.push([rr, cc]);
                 visited[rr][cc] = true;
                 prevNode[rr][cc] = currentNode;
             }
 
-            await new Promise(r => setTimeout(r, 10));
+            await new Promise(r => setTimeout(r, 1));
+
+            this.frames.push(JSON.parse(JSON.stringify(visited)));
         }
 
         if (reached_end){
-            let currNode = endNode;
-            while (currNode != startNode){
-                let CELL_WIDTH =  700 / grid[0].length; // IMPORTANTTTT CHANGE DA 1000  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
-                let CELL_HEIGHT = 700 / grid.length;
+            let currNode = this.endNode;
+            while (currNode != this.startNode){
+                let CELL_WIDTH =  700 / this.grid[0].length; // IMPORTANTTTT CHANGE DA 1000  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
+                let CELL_HEIGHT = 700 / this.grid.length;
 
                 ctx.strokeStyle = "#AAAAFF";
 
@@ -265,6 +309,8 @@ class BFS {
                 ctx.fillRect(currNode[0] * CELL_WIDTH, currNode[1] * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
 
                 currNode = prevNode[currNode[0]][currNode[1]];
+
+                await new Promise(r => setTimeout(r, 1));
             }
             alert("ending found!");
         }

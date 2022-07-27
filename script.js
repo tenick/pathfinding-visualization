@@ -16,10 +16,10 @@ function execute(){
     let algo = null;
     switch (algorithm.value){
         case "dfs":
-            algo = new DFS();
+            algo = new DFS(visualizer, visualizer.grid, visualizer.startNode, visualizer.endNode);
             break;
         case "bfs":
-            algo = new BFS();
+            algo = new BFS(visualizer, visualizer.grid, visualizer.startNode, visualizer.endNode);
             break;
     }
 
@@ -30,6 +30,40 @@ function update(){
     let newGridSize = parseInt(document.querySelector("input[type='number']").value);
     visualizer = new PathFindingVisualizer(newGridSize, newGridSize, ctx);
     visualizer.draw();
+}
+
+
+var playbackRange = document.getElementById('playbackRange');
+function rangeInput(){
+    let frameIndex = playbackRange.value;
+    if (visualizer.algorithm.frames.length == 0)
+        return;
+
+    playbackRange.min = 0;
+    playbackRange.max = visualizer.algorithm.frames.length - 1;
+
+    let grid = visualizer.algorithm.grid;
+    visualizer.draw(grid);
+    
+    let currVisited = visualizer.algorithm.frames[frameIndex];
+
+
+    let CELL_WIDTH =  700 / grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
+    let CELL_HEIGHT = 700 / grid.length;
+
+    visualizer.ctx.fillStyle = "#1111FF";
+    visualizer.ctx.globalAlpha = 0.5;
+
+    for (let i = 0; i < currVisited.length; i++){
+        for (let j = 0; j < currVisited[i].length; j++){
+            let cell = currVisited[i][j];
+            if (cell)
+                this.ctx.fillRect(i * CELL_WIDTH, j * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
+        }
+    }
+    visualizer.ctx.globalAlpha = 1;
+    
+
 }
 
 // add canvas events

@@ -12,6 +12,7 @@
     <section class="hero is-link has-text-centered p-4">
         <p class="title">Pathfinding Algorithm Visualizer</p>
         <p class="subtitle">Explore the pathfinding algorithms using these functions!</p>
+        <p class="subtitle">todo: enable playback on algorithm finish, try visualizing visited frame by frame for now</p>
     </section>
     <div class="columns has-text-centered">
         <div class="column is-3">
@@ -43,7 +44,7 @@
             <section class="hero is-info has-text-centered">
                 <div class="container pt-2">
                     <h1 class="h1">Grid Size</h1>
-                    <input class="input" type="number" id="gridSize" min="2" max="1000" value="10">
+                    <input class="input" type="number" id="gridSize" min="2" max="1000" value="20">
                 </div>
                 <div class="hero-body p-3">
                     <div class="select">
@@ -69,7 +70,7 @@
                         <input class="input column is-4" type="number" id="speed" min="1" max="100" value="10">
                     </div>
                     <div class="buttons is-centered">
-                        <input type="range">
+                        <input id="playbackRange" type="range" min='0' value='0' oninput="rangeInput();">
                     </div>
                 </div>
         
@@ -77,6 +78,7 @@
                     <button class="button is-light" type="button" value="Start Over">Start Over</button>
                     <button class="button is-light" type="button" value="Step Backward">Step Backward</button>
                     <button class="button is-light" type="button" value="Play">Play</button>
+                    <button class="button is-light" type="button" value="Step Forward">Step Forward</button>
                     <button class="button is-light" type="button" value="End">End</button>
                 </div>
             </section>
