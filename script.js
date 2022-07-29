@@ -21,6 +21,9 @@ function execute(){
         case "bfs":
             algo = new BFS(visualizer, visualizer.grid, visualizer.startNode, visualizer.endNode);
             break;
+        case "astar":
+            algo = new AStar(visualizer, visualizer.grid, visualizer.startNode, visualizer.endNode);
+            break;
     }
 
     visualizer.algorithm = algo;
@@ -93,8 +96,8 @@ function editGrid(e){
     let CELL_WIDTH =  CVS_WIDTH / visualizer.grid.length;
     let CELL_HEIGHT = CVS_HEIGHT / visualizer.grid[0].length;
 
-    let r = Math.floor(x / CELL_WIDTH);
-    let c = Math.floor(y / CELL_HEIGHT);
+    let r = Math.floor(y / CELL_HEIGHT);
+    let c = Math.floor(x / CELL_WIDTH); 
 
     let newCellVal = GridObject.EMPTY;
     switch(editType){
