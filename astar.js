@@ -1,3 +1,5 @@
+import {GridObject} from "./pathfindingVisualizer.js";
+
 class AStarNode{
     constructor(r, c, g, h, parent){
         this.r = r;
@@ -11,13 +13,13 @@ class AStarNode{
     }
 }
 
-class AStar{
-    constructor(visualizer, grid, startNode, endNode){
+export default class AStar{
+    constructor(visualizer){
         this.visualizer = visualizer;
-        this.ctx = this.visualizer.ctx;
-        this.grid = grid;
-        this.startNode = startNode;
-        this.endNode = endNode;
+        this.ctx = visualizer.ctx;
+        this.grid = visualizer.grid;
+        this.startNode = visualizer.startNode;
+        this.endNode = visualizer.endNode;
         this.pathFromStartToEnd = null;
         this.frames = [];
     }
@@ -58,8 +60,8 @@ class AStar{
 
             visited[currentNode.r][currentNode.c] = true;
 
-            let CELL_WIDTH =  700 / this.grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
-            let CELL_HEIGHT = 700 / this.grid.length;
+            let CELL_WIDTH =  this.ctx.canvas.width / this.grid[0].length;
+            let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
             ctx.strokeStyle = "#AAAAFF";
 
@@ -108,8 +110,8 @@ class AStar{
             while (currNode.parent != null){
                 let parentNode = currNode.parent;
 
-                let CELL_WIDTH =  700 / this.grid[0].length; // IMPORTANTTTT CHANGE DA 1000  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
-                let CELL_HEIGHT = 700 / this.grid.length;
+                let CELL_WIDTH =  this.ctx.canvas.width / this.grid[0].length;
+                let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
                 ctx.strokeStyle = "#AAAAFF";
 
@@ -143,5 +145,8 @@ class AStar{
         openList.splice(index, 1);
 
         return pathDecision;
+    }
+    drawFrame(frameIndex){
+        
     }
 }

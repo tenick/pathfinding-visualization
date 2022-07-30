@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script type="module" src="./script.js"></script>
     <title>Pathdinding Algorithm Visualizer</title>
 </head>
 <body>
@@ -47,7 +48,7 @@
                 </div>
                 <div class="hero-body p-3">
                     <div class="select">
-                        <select name="algorithm" id="algorithm">
+                        <select name="algorithm" id="algorithmDropdown">
                             <option value="dfs">Depth First Search (DFS)</option>
                             <option value="bfs">Breadth First Search (BFS)</option>
                             <option value="dijkstra">Dijkstra's Algorithm</option>
@@ -55,9 +56,9 @@
                         </select>
                     </div>
 
-                    <button class="button is-link" value="update" onclick="update()">Update</button>
+                    <button id="updateGridSizeBtn" class="button is-link" value="update">Update</button>
 
-                    <button class="button is-danger is-medium column is-fullwidth mt-3 mb-3" type="button" id="execute" value="Execute" onclick="execute();">EXECUTE</button>
+                    <button class="button is-danger is-medium column is-fullwidth mt-3 mb-3" type="button" id="executeBtn" value="Execute">EXECUTE</button>
 
                 </div>
             </section>
@@ -69,28 +70,31 @@
                         <input class="input column is-4" type="number" id="speed" min="1" max="100" value="10">
                     </div>
                     <div class="buttons is-centered">
-                        <input id="playbackRange" type="range" min='0' value='0' oninput="rangeInput();">
+                        <input id="playbackRange" type="range" min='0' value='0'>
                     </div>
                 </div>
         
                 <div class="buttons is-centered">
-                    <button class="button is-light" type="button" value="Start Over">Start Over</button>
-                    <button class="button is-light" type="button" value="Step Backward">Step Backward</button>
-                    <button class="button is-light" type="button" value="Play">Play</button>
-                    <button class="button is-light" type="button" value="Step Forward">Step Forward</button>
-                    <button class="button is-light" type="button" value="End">End</button>
+                    <button id="startOverBtn" class="button is-light" type="button" value="Start Over">Start Over</button>
+                    <button id="stepBackBtn" class="button is-light" type="button" value="Step Backward">Step Backward</button>
+                    <button id="playBtn" class="button is-light" type="button" value="Play">Play</button>
+                    <button id="stepForwardBtn" class="button is-light" type="button" value="Step Forward">Step Forward</button>
+                    <button id="endBtn" class="button is-light" type="button" value="End">End</button>
                 </div>
             </section>
+
+            <!-- this is where the information for every step of the algorithm is located -->
+            <div id="frameInfoDiv">
+                <!-- sample frameInfoDiv content
+                <p><b>Iteration:</b> 69</p>
+                <p><b>Coordinate:</b> row 22 column 5</p>
+                <p><b>Operation:</b> Queue-ing</p>
+                <p><b>Description:</b> Mark as visited</p> -->
+            </div>
         </div>
         <div class="column">
             <canvas id="cvs"></canvas>
         </div>
     </div>
-
-    <script src="./dfs.js"></script>
-    <script src="./bfs.js"></script>
-    <script src="./astar.js"></script>
-    <script src="./pathFindingVisualizer.js"></script>
-    <script src="./script.js"></script>
 </body>
 </html>

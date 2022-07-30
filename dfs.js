@@ -1,10 +1,12 @@
-class DFS {
-    constructor(visualizer, grid, startNode, endNode){
+import {GridObject} from "./pathfindingVisualizer.js";
+
+export default class DFS {
+    constructor(visualizer){
         this.visualizer = visualizer;
         this.ctx = visualizer.ctx;
-        this.grid = grid;
-        this.startNode = startNode;
-        this.endNode = endNode;
+        this.grid = visualizer.grid;
+        this.startNode = visualizer.startNode;
+        this.endNode = visualizer.endNode;
         this.pathFromStartToEnd = null;
         this.frames = [];
     }
@@ -41,8 +43,8 @@ class DFS {
         while (stack.length > 0) {
             let currentNode = stack[stack.length - 1];
 
-            let CELL_WIDTH =  700 / this.grid[0].length; // IMPORTANTTTT CHANGE DA 500  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
-            let CELL_HEIGHT = 700 / this.grid.length;
+            let CELL_WIDTH =  this.ctx.canvas.width / this.grid[0].length;
+            let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
             ctx.strokeStyle = "#AAAAFF";
 
@@ -90,8 +92,8 @@ class DFS {
         if (reached_end){
             let currNode = this.endNode;
             while (currNode != this.startNode){
-                let CELL_WIDTH =  700 / this.grid[0].length; // IMPORTANTTTT CHANGE DA 1000  0SDAFASFASDFSADGASDFSADFSAFSADFSADFSADFASDFSADF0000000000000000000
-                let CELL_HEIGHT = 700 / this.grid.length;
+                let CELL_WIDTH =  this.ctx.canvas.width / this.grid[0].length;
+                let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
                 ctx.strokeStyle = "#AAAAFF";
 
@@ -106,5 +108,8 @@ class DFS {
             }
             alert("ending found!");
         }
+    }
+    drawFrame(frameIndex){
+        
     }
 }
