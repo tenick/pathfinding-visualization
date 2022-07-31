@@ -1,5 +1,3 @@
-
-
 export default class Playback {
     constructor(visualizer){
         this.visualizer = visualizer;
@@ -124,6 +122,9 @@ export default class Playback {
     }
 
     startOver(){
+        if (this.visualizer.isAlgorithmRunning)
+            return;
+
         this.playbackRange.min = 0;
         this.playbackRange.max = this.visualizer.algorithm.frames.length - 1;
 
@@ -132,6 +133,9 @@ export default class Playback {
     }
 
     end(){
+        if (this.visualizer.isAlgorithmRunning)
+            return;
+
         this.playbackRange.min = 0;
         this.playbackRange.max = this.visualizer.algorithm.frames.length - 1;
     
@@ -140,6 +144,9 @@ export default class Playback {
     }
 
     stepBack(){
+        if (this.visualizer.isAlgorithmRunning)
+            return;
+
         this.playbackRange.min = 0;
         this.playbackRange.max = this.visualizer.algorithm.frames.length - 1;
     
@@ -152,6 +159,9 @@ export default class Playback {
     }
 
     stepForward(){
+        if (this.visualizer.isAlgorithmRunning)
+            return;
+
         this.playbackRange.min = 0;
         this.playbackRange.max = this.visualizer.algorithm.frames.length - 1;
         

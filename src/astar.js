@@ -64,12 +64,10 @@ export default class AStar{
             let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
             ctx.strokeStyle = "#AAAAFF";
-
             ctx.fillStyle = "#11F";
 
             ctx.strokeRect(currentNode.c * CELL_WIDTH, currentNode.r * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
             ctx.fillRect(currentNode.c * CELL_WIDTH, currentNode.r * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
-
 
 
             // check if current node reached end
@@ -114,7 +112,6 @@ export default class AStar{
                 let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
                 ctx.strokeStyle = "#AAAAFF";
-
                 ctx.fillStyle = "#1F1";
 
                 ctx.strokeRect(parentNode.c * CELL_WIDTH, currNode.r * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);

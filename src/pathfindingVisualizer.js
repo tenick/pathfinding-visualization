@@ -2,20 +2,7 @@ import DFS from "./dfs.js";
 import BFS from "./bfs.js";
 import AStar from "./astar.js";
 
-// pathfinding operations:
-// start
-// enqueue neighbors (blue)
-// check if neighbor is visited/queued (yellow)
-// visited, skip (pink)
-// visit neighbor (purple)
-// draw shortest path (saturated green)
-// end
 
-// grid objects:
-// 0 : empty space (gray-white)
-// 1 : wall (black)
-// 2 : start (green)
-// 3 : end (red)
 export const GridObject = {
     EMPTY: 0,
     WALL: 1,

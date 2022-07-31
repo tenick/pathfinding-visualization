@@ -85,12 +85,10 @@ export default class DFS {
             let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
             ctx.strokeStyle = "#AAAAFF";
-
             ctx.fillStyle = "#11F";
 
             ctx.strokeRect(currentNode[1] * CELL_WIDTH, currentNode[0] * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
             ctx.fillRect(currentNode[1] * CELL_WIDTH, currentNode[0] * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
-
 
 
             // check if current node reached end
@@ -185,7 +183,6 @@ export default class DFS {
                 let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
                 ctx.strokeStyle = "#AAAAFF";
-
                 ctx.fillStyle = "#1F1";
 
                 ctx.strokeRect(currNode[1] * CELL_WIDTH, currNode[0] * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);

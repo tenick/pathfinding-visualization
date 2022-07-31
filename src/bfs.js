@@ -117,7 +117,6 @@ export default class BFS {
             let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
             ctx.strokeStyle = "#AAAAFF";
-
             ctx.fillStyle = "#11F";
 
             ctx.strokeRect(currentNode[1] * CELL_WIDTH, currentNode[0] * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
@@ -213,7 +212,6 @@ export default class BFS {
                 let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
 
                 ctx.strokeStyle = "#AAAAFF";
-
                 ctx.fillStyle = "#1F1";
 
                 ctx.strokeRect(currNode[1] * CELL_WIDTH, currNode[0] * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
