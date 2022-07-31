@@ -67,7 +67,7 @@
                 <div class="buttons is-centered">
                     <div class="field is-horizontal">
                         <h1 class="h1 p-2">Speed (ms)</h1>
-                        <input class="input column is-4" type="number" id="speed" min="1" max="100" value="10">
+                        <input id="speedInput" class="input column is-4" type="number" id="speed" min="1" max="1000" value="10">
                     </div>
                     <div class="buttons is-centered">
                         <input id="playbackRange" type="range" min='0' value='0'>
@@ -78,6 +78,7 @@
                     <button id="startOverBtn" class="button is-light" type="button" value="Start Over">Start Over</button>
                     <button id="stepBackBtn" class="button is-light" type="button" value="Step Backward">Step Backward</button>
                     <button id="playBtn" class="button is-light" type="button" value="Play">Play</button>
+                    <button id="pauseBtn" class="button is-light" type="button" value="Pause" style="display: none;">Pause</button>
                     <button id="stepForwardBtn" class="button is-light" type="button" value="Step Forward">Step Forward</button>
                     <button id="endBtn" class="button is-light" type="button" value="End">End</button>
                 </div>

@@ -46,6 +46,7 @@ export const GridObject = {
         this.grid[0][0] = 2;
         this.grid[row - 1][column - 1] = 3;
 
+        this.isAlgorithmRunning = false;
 
         // UI elements/events
         this.algorithm = new DFS(this, this.startNode, this.endNode, this.grid);
@@ -72,7 +73,9 @@ export const GridObject = {
         this.ctx.canvas.addEventListener("mousemove", function(e) {
             if (this.editMode) this.editGrid(e);
         }.bind(this));
+
         this.ctx.canvas.addEventListener("mousedown", function(e) {
+            this.editMode = true;
             if (this.editMode) this.editGrid(e);
         }.bind(this));
 
@@ -156,6 +159,10 @@ export const GridObject = {
     }
 
     async execute(){
+        if (this.isAlgorithmRunning || window.playback.isPlaying)
+            return;
+
+        this.isAlgorithmRunning = true;
         let algo = null;
         switch (this.algorithmDropdown.value){
             case "dfs":
@@ -172,6 +179,8 @@ export const GridObject = {
         this.algorithm = algo;
 
         await this.algorithm.execute();
+        
+        this.isAlgorithmRunning = false;
     }
 
     draw(grid=this.grid){
@@ -179,6 +188,7 @@ export const GridObject = {
         let CELL_HEIGHT = this.ctx.canvas.height / grid.length;
 
         this.ctx.strokeStyle = "#AAAAFF";
+        this.ctx.globalAlpha = 1;
 
 
         for (let r = 0; r < grid.length; r++){

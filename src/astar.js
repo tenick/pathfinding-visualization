@@ -17,9 +17,9 @@ export default class AStar{
     constructor(visualizer){
         this.visualizer = visualizer;
         this.ctx = visualizer.ctx;
-        this.grid = visualizer.grid;
-        this.startNode = visualizer.startNode;
-        this.endNode = visualizer.endNode;
+        this.grid = JSON.parse(JSON.stringify(visualizer.grid));
+        this.startNode = JSON.parse(JSON.stringify(visualizer.startNode));
+        this.endNode = JSON.parse(JSON.stringify(visualizer.endNode));
         this.pathFromStartToEnd = null;
         this.frames = [];
     }

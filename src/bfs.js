@@ -1,4 +1,5 @@
-import {GridObject} from "./pathfindingVisualizer.js";
+import { GridObject } from "./pathfindingVisualizer.js";
+import { drawPath } from "./utils.js";
 
 // BFS playback data structure:
 /* { 
@@ -31,9 +32,9 @@ export default class BFS {
     constructor(visualizer){
         this.visualizer = visualizer;
         this.ctx = visualizer.ctx;
-        this.grid = visualizer.grid;
-        this.startNode = visualizer.startNode;
-        this.endNode = visualizer.endNode;
+        this.grid = JSON.parse(JSON.stringify(visualizer.grid));
+        this.startNode = JSON.parse(JSON.stringify(visualizer.startNode));
+        this.endNode = JSON.parse(JSON.stringify(visualizer.endNode));
         this.pathFromStartToEnd = null;
         this.frames = [];
     }
@@ -44,9 +45,6 @@ export default class BFS {
         let dr = [-1, 1, 0, 0];
         let dc = [0, 0, 1, -1];
 
-        // initialize queue
-        let queue = [this.startNode];
-
         // false-initialized visited grid, then add start node as visited
         let visited = new Array(this.grid.length);
         for (let i = 0; i < visited.length; i++){
@@ -54,22 +52,6 @@ export default class BFS {
             for (let j=0; j<a.length; ++j) a[j] = false;
             visited[i] = a;
         }
-
-        this.frames.push(new BFSFrame(
-            JSON.parse(JSON.stringify(visited)),
-            JSON.parse(JSON.stringify(queue)),
-            "Initialization",
-            "Initializing empty queue"
-        ));
-        visited[this.startNode[0]][this.startNode[1]] = true;
-        this.frames.push(new BFSFrame(
-            JSON.parse(JSON.stringify(visited)),
-            JSON.parse(JSON.stringify(queue)),
-            "Initialization",
-            "Add start node to queue",
-            [this.startNode],
-            ["#1F1"]
-        ));
 
 
         // null-initialized prevNode grid, then add start node as its own parent
@@ -81,10 +63,28 @@ export default class BFS {
         }
         prevNode[this.startNode[0]][this.startNode[1]] = this.startNode;
         
+        // initialize queue
+        let queue = [];
+
+        this.frames.push(new BFSFrame(
+            JSON.parse(JSON.stringify(visited)),
+            JSON.parse(JSON.stringify(queue)),
+            "Initialization",
+            "Initializing empty queue"
+        ));
+        
+        queue.push(this.startNode);
         
         this.frames.push(new BFSFrame(
             JSON.parse(JSON.stringify(visited)),
-            [],
+            JSON.parse(JSON.stringify(queue)),
+            "Initialization",
+            "Enqueue start node to queue"
+        ));
+
+        this.frames.push(new BFSFrame(
+            JSON.parse(JSON.stringify(visited)),
+            JSON.parse(JSON.stringify(queue)),
             "Start",
             "Run BFS"
         ));
@@ -206,6 +206,8 @@ export default class BFS {
 
         if (reached_end){
             let currNode = this.endNode;
+            let path = [currNode];
+
             while (currNode != this.startNode){
                 let CELL_WIDTH =  this.ctx.canvas.width / this.grid[0].length;
                 let CELL_HEIGHT = this.ctx.canvas.height / this.grid.length;
@@ -218,9 +220,21 @@ export default class BFS {
                 ctx.fillRect(currNode[1] * CELL_WIDTH, currNode[0] * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
 
                 currNode = prevNode[currNode[0]][currNode[1]];
+                path.push(currNode);
 
                 await new Promise(r => setTimeout(r, 1));
             }
+
+            this.frames.push(new BFSFrame(
+                JSON.parse(JSON.stringify(visited)),
+                JSON.parse(JSON.stringify(queue)),
+                "Draw Path",
+                "Drawing path from start to end.",
+                null,
+                null,
+                path
+            ));
+
             alert("ending found!");
         }
         else {
@@ -295,10 +309,11 @@ export default class BFS {
             frameInfoDiv.innerHTML += '<p><b>Operation: </b>'+ currFrame.operation +'</p>';
             frameInfoDiv.innerHTML += '<p><b>Description: </b>'+ currFrame.operationDescription +'</p>';
         }
-
+        
         this.ctx.globalAlpha = 1;
 
-
-        
+        if (currFrame.path != null){
+            drawPath(this.grid, currFrame.path, this.ctx);
+        }
     }
 }
