@@ -133,7 +133,7 @@ export default class Playback {
         this.playbackRange.max = this.visualizer.algorithm.frames.length - 1;
 
         this.playbackRange.value = this.playbackRange.min;
-        this.visualizer.algorithm.drawFrame(newVal);
+        this.visualizer.algorithm.drawFrame(this.playbackRange.min);
     }
 
     end(){
@@ -144,7 +144,7 @@ export default class Playback {
         this.playbackRange.max = this.visualizer.algorithm.frames.length - 1;
     
         this.playbackRange.value = this.playbackRange.max;
-        this.visualizer.algorithm.drawFrame(newVal);
+        this.visualizer.algorithm.drawFrame(this.playbackRange.max);
     }
 
     stepBack(){
