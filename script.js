@@ -4,8 +4,8 @@ import PathFindingVisualizer from "./src/pathfindingVisualizer.js";
 var canvas = document.getElementById("cvs");
 var ctx = canvas.getContext("2d");
 
-var CVS_WIDTH = 700;
-var CVS_HEIGHT = 700;
+var CVS_WIDTH = 900;
+var CVS_HEIGHT = 600;
 
 canvas.width = CVS_WIDTH;
 canvas.height = CVS_HEIGHT;

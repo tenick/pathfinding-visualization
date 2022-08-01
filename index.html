@@ -14,40 +14,43 @@
         <p class="title">Pathfinding Algorithm Visualizer</p>
         <p class="subtitle">Explore the pathfinding algorithms using these functions!</p>
     </section>
-    <div class="columns has-text-centered">
-        <div class="column is-3">
-            <section class="hero is-success has-text-centered">
-                <div class="hero-body p-3">
-                    <div class="container">
-                        <label class="radio" for="startNode">
-                            <input type="radio" id="startNode" name="operation" value="Start Node">
-                            Start Node
-                        </label>
-        
-                        <label class="radio" for="endNode">
-                            <input type="radio" id="endNode" name="operation" value="End Node">
-                            End Node
-                        </label>
-        
-                        <label class="radio" for="drawWall">
-                            <input type="radio" id="drawWall" name="operation" checked value="Draw Wall">
-                            Draw Wall
-                        </label>
-        
-                        <label class="radio" for="eraseWall">
-                            <input type="radio" id="eraseWall" name="operation" value="Erase Wall">
-                            Erase Wall
-                        </label> 
-                    </div>
-                </div>
-            <section>
-            <section class="hero is-info has-text-centered">
-                <div class="container pt-2">
-                    <h1 class="h1">Grid Size</h1>
-                    <input class="input" type="number" id="gridSize" min="2" max="1000" value="20">
-                </div>
-                <div class="hero-body p-3">
-                    <div class="select">
+
+    <section class="hero is-success has-text-centered">
+        <div class="hero-body p-1">
+            <div class="container">
+                <label class="radio" for="startNode">
+                    <input type="radio" id="startNode" name="operation" value="Start Node">
+                    Start Node
+                </label>
+
+                <label class="radio" for="endNode">
+                    <input type="radio" id="endNode" name="operation" value="End Node">
+                    End Node
+                </label>
+
+                <label class="radio" for="drawWall">
+                    <input type="radio" id="drawWall" name="operation" checked value="Draw Wall">
+                    Draw Wall
+                </label>
+
+                <label class="radio" for="eraseWall">
+                    <input type="radio" id="eraseWall" name="operation" value="Erase Wall">
+                    Erase Wall
+                </label> 
+            </div>
+        </div>
+    </section>
+    <section class="hero is-info has-text-centered">
+        <div class="hero-body p-3">
+            <div class="field is-grouped is-grouped-centered">
+                <p class="control">
+                    <a class="button is-small is-static">Grid size</a>
+                </p>
+                <p class="control">
+                    <input class="input is-small" type="number" id="gridSize" min="2" max="1000" value="20">
+                </p>
+                <div class="control">
+                    <div class="select is-small">
                         <select name="algorithm" id="algorithmDropdown">
                             <option value="dfs">Depth First Search (DFS)</option>
                             <option value="bfs">Breadth First Search (BFS)</option>
@@ -55,47 +58,62 @@
                             <option value="astar">A*</option>
                         </select>
                     </div>
-
-                    <button id="updateGridSizeBtn" class="button is-link" value="update">Update</button>
-
-                    <button class="button is-danger is-medium column is-fullwidth mt-3 mb-3" type="button" id="executeBtn" value="Execute">EXECUTE</button>
-
                 </div>
-            </section>
-            
-            <section class="hero is-dark has-text-centered p-4">
-                <div class="buttons is-centered">
-                    <div class="field is-horizontal">
-                        <h1 class="h1 p-2">Speed (ms)</h1>
-                        <input id="speedInput" class="input column is-4" type="number" id="speed" min="1" max="1000" value="10">
-                    </div>
-                    <div class="buttons is-centered">
-                        <input id="playbackRange" type="range" min='0' value='0'>
-                    </div>
+                <div class="control">
+                    <button id="updateGridSizeBtn" class="button is-small is-danger is-light" value="update">Update</button>
                 </div>
-        
-                <div class="buttons is-centered">
-                    <button id="startOverBtn" class="button is-light" type="button" value="Start Over">Start Over</button>
-                    <button id="stepBackBtn" class="button is-light" type="button" value="Step Backward">Step Backward</button>
-                    <button id="playBtn" class="button is-light" type="button" value="Play">Play</button>
-                    <button id="pauseBtn" class="button is-light" type="button" value="Pause" style="display: none;">Pause</button>
-                    <button id="stepForwardBtn" class="button is-light" type="button" value="Step Forward">Step Forward</button>
-                    <button id="endBtn" class="button is-light" type="button" value="End">End</button>
-                </div>
-            </section>
-
-            <!-- this is where the information for every step of the algorithm is located -->
-            <div id="frameInfoDiv">
-                <!-- sample frameInfoDiv content
-                <p><b>Iteration:</b> 69</p>
-                <p><b>Coordinate:</b> row 22 column 5</p>
-                <p><b>Operation:</b> Queue-ing</p>
-                <p><b>Description:</b> Mark as visited</p> -->
+            </div>
+            <div class="column is-half is-offset-one-quarter p-0">
+                <button class="button is-danger is-fullwidth" type="button" id="executeBtn" value="Execute">EXECUTE</button>
             </div>
         </div>
-        <div class="column">
-            <canvas id="cvs"></canvas>
+    </section>
+    <section class="is-dark has-text-centered">
+        <canvas id="cvs"></canvas>
+    </section>
+    <section class="hero is-dark has-text-centered p-4">
+        <div class="field is-grouped is-grouped-centered">
+            <p class="control">
+                <a class="button is-small is-static">Speed (ms)</a>
+            </p>
+            <p class="control">
+                <input id="speedInput" class="input is-small" type="number" id="speed" min="1" max="1000" value="10">
+            </p>
+            <p class="control">
+                <input id="playbackRange" type="range" min='0' value='0'>
+            </p>
+            <div class="control">
+                <button id="startOverBtn" class="button is-info is-light is-small" type="button" value="Start Over">Start Over</button>
+            </div>
+            <div class="control">
+                <button id="stepBackBtn" class="button is-warning is-light is-small" type="button" value="Step Backward">Step Backward</button>
+            </div>
+            <div class="control">
+                <button id="playBtn" class="button is-danger is-small" type="button" value="Play">Play</button>
+                <button id="pauseBtn" class="button is-grey-light is-small" type="button" value="Pause" style="display: none;">Pause</button>
+            </div>
+            <div class="control">
+                <button id="stepForwardBtn" class="button is-warning is-light is-small" type="button" value="Step Forward">Step Forward</button>
+            </div>
+            <div class="control">
+                <button id="endBtn" class="button is-info is-light is-small" type="button" value="End">End</button>
+            </div>
         </div>
+    </section>
+    <!-- this is where the information for every step of the algorithm is located -->
+    <div id="frameInfoDiv">
+        <!-- sample frameInfoDiv content
+        <p><b>Iteration:</b> 69</p>
+        <p><b>Coordinate:</b> row 22 column 5</p>
+        <p><b>Operation:</b> Queue-ing</p>
+        <p><b>Description:</b> Mark as visited</p> -->
     </div>
+    <section class="hero is-link has-text-centered p-1">
+        <div class="content has-text-centered">
+            <p>
+                <a href="https://github.com/tenick/pathfinding-visualization.git"><strong>Pathfinding Algorithm Visualizer</strong></a> by <a href="https://github.com/tenick">Kenneth Usares</a> and <a href="https://github.com/rmbernardo27">Reanne Bernardo</a>.
+            </p>
+        </div>
+    </section>
 </body>
 </html>
