@@ -34,6 +34,9 @@ export default class Playback {
     }
 
     #keyboard(key){
+        if (document.activeElement instanceof HTMLButtonElement  || document.activeElement instanceof HTMLInputElement )
+            return;
+        
         switch(key.code){
             case "Space":
                 if (this.playBtn.style.display == "none") // means visualizer is currently playing
@@ -52,6 +55,7 @@ export default class Playback {
                 break;
             case "End":
                 this.end();
+                break;
             case "BracketRight":
                 {
                     let currVal = parseInt(this.speedInput.value);
@@ -129,7 +133,7 @@ export default class Playback {
         this.playbackRange.max = this.visualizer.algorithm.frames.length - 1;
 
         this.playbackRange.value = this.playbackRange.min;
-        this.rangeInput();
+        this.visualizer.algorithm.drawFrame(newVal);
     }
 
     end(){
@@ -140,7 +144,7 @@ export default class Playback {
         this.playbackRange.max = this.visualizer.algorithm.frames.length - 1;
     
         this.playbackRange.value = this.playbackRange.max;
-        this.rangeInput();
+        this.visualizer.algorithm.drawFrame(newVal);
     }
 
     stepBack(){
@@ -155,13 +159,13 @@ export default class Playback {
             newVal = this.playbackRange.min;
     
         this.playbackRange.value = newVal;
-        this.rangeInput();
+        this.visualizer.algorithm.drawFrame(newVal);
     }
 
     stepForward(){
         if (this.visualizer.isAlgorithmRunning)
             return;
-
+            
         this.playbackRange.min = 0;
         this.playbackRange.max = this.visualizer.algorithm.frames.length - 1;
         
@@ -170,7 +174,7 @@ export default class Playback {
             newVal = this.playbackRange.max;
 
         this.playbackRange.value = newVal;
-        this.rangeInput();
+        this.visualizer.algorithm.drawFrame(newVal);
     }
 
     rangeInput(){

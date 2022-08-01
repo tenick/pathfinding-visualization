@@ -62,3 +62,25 @@ export function drawPath(grid, path, ctx, thickness=0.4){
         }
     }
 }
+
+export function drawAStarNode(aStarNode, grid, ctx, fillStyle="#111", ghSize=.3, fSize=.8){
+    let CELL_WIDTH =  ctx.canvas.width / grid[0].length;
+    let CELL_HEIGHT = ctx.canvas.height / grid.length;
+
+    // draw the texts
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = fillStyle;
+    // draw g and h
+    let ghPixelSize = Math.floor(ghSize * CELL_HEIGHT);
+
+    ctx.font = ghPixelSize + "px Monospace";
+
+    ctx.fillText(aStarNode.g, aStarNode.c * CELL_WIDTH, aStarNode.r * CELL_HEIGHT + ghPixelSize);
+    ctx.fillText(aStarNode.h, aStarNode.c * CELL_WIDTH, aStarNode.r * CELL_HEIGHT + CELL_HEIGHT);
+
+    // draw f
+    let fPixelSize = Math.floor(fSize * CELL_HEIGHT);
+
+    ctx.font = fPixelSize + "px Monospace";
+    ctx.fillText(aStarNode.g + aStarNode.h, aStarNode.c * CELL_WIDTH + ghPixelSize, aStarNode.r * CELL_HEIGHT + fPixelSize);
+}

@@ -1,6 +1,7 @@
 import DFS from "./dfs.js";
 import BFS from "./bfs.js";
 import AStar from "./astar.js";
+import Dijkstra from "./dijkstra.js";
 
 
 export const GridObject = {
@@ -72,6 +73,9 @@ export const GridObject = {
     }
     
     editGrid(e){
+        if (this.isAlgorithmRunning || window.playback.isPlaying)
+            return;
+
         let x = e.offsetX;
         let y = e.offsetY;
         
@@ -149,6 +153,7 @@ export const GridObject = {
         if (this.isAlgorithmRunning || window.playback.isPlaying)
             return;
 
+        this.draw();
         this.isAlgorithmRunning = true;
         let algo = null;
         switch (this.algorithmDropdown.value){
@@ -157,6 +162,9 @@ export const GridObject = {
                 break;
             case "bfs":
                 algo = new BFS(this);
+                break;
+            case "dijkstra":
+                algo = new Dijkstra(this);
                 break;
             case "astar":
                 algo = new AStar(this);
@@ -196,6 +204,5 @@ export const GridObject = {
             }
         }
     }
-
 }
 
