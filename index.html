@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/9ed90db1e3.js" crossorigin="anonymous"></script>
     <script type="module" src="./script.js"></script>
     <title>Pathdinding Algorithm Visualizer</title>
 </head>
@@ -74,29 +75,41 @@
     <section class="hero is-dark has-text-centered p-4">
         <div class="field is-grouped is-grouped-centered">
             <p class="control">
-                <a class="button is-small is-static">Speed (ms)</a>
+                <a class="button is-static">Speed (ms)</a>
             </p>
             <p class="control">
-                <input id="speedInput" class="input is-small" type="number" id="speed" min="1" max="1000" value="10">
+                <input id="speedInput" class="input" type="number" id="speed" min="1" max="1000" value="10">
             </p>
             <p class="control">
                 <input id="playbackRange" type="range" min='0' value='0'>
             </p>
             <div class="control">
-                <button id="startOverBtn" class="button is-info is-light is-small" type="button" value="Start Over">Start Over</button>
+                <button id="startOverBtn" class="button is-info is-light" type="button" value="Start Over">
+                    <i class="fa-solid fa-repeat"></i>
+                </button>
             </div>
             <div class="control">
-                <button id="stepBackBtn" class="button is-warning is-light is-small" type="button" value="Step Backward">Step Backward</button>
+                <button id="stepBackBtn" class="button is-warning is-light" type="button" value="Step Backward">
+                    <i class="fa-solid fa-backward-step"></i>
+                </button>
             </div>
             <div class="control">
-                <button id="playBtn" class="button is-danger is-small" type="button" value="Play">Play</button>
-                <button id="pauseBtn" class="button is-grey-light is-small" type="button" value="Pause" style="display: none;">Pause</button>
+                <button id="playBtn" class="button is-danger" type="button" value="Play">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+                <button id="pauseBtn" class="button is-grey-light" type="button" value="Pause" style="display: none;">
+                    <i class="fa-solid fa-pause"></i>
+                </button>
             </div>
             <div class="control">
-                <button id="stepForwardBtn" class="button is-warning is-light is-small" type="button" value="Step Forward">Step Forward</button>
+                <button id="stepForwardBtn" class="button is-warning is-light" type="button" value="Step Forward">
+                    <i class="fa-solid fa-forward-step"></i>
+                </button>
             </div>
             <div class="control">
-                <button id="endBtn" class="button is-info is-light is-small" type="button" value="End">End</button>
+                <button id="endBtn" class="button is-info is-light" type="button" value="End">
+                    <i class="fa-solid fa-stop"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -108,7 +121,7 @@
         <p><b>Operation:</b> Queue-ing</p>
         <p><b>Description:</b> Mark as visited</p> -->
     </div>
-    <section class="hero is-link has-text-centered p-1">
+    <section class="hero is-link has-text-centered p-">
         <div class="content has-text-centered">
             <p>
                 <a href="https://github.com/tenick/pathfinding-visualization.git"><strong>Pathfinding Algorithm Visualizer</strong></a> by <a href="https://github.com/tenick">Kenneth Usares</a> and <a href="https://github.com/rmbernardo27">Reanne Bernardo</a>.
