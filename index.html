@@ -95,6 +95,10 @@
         </div>
     </section>
 
+    <div class="content p-5" id="algorithmInfoDiv">
+        DFS uses a stack data structure to traverse the grid. The starting node will the only node in the stack at the beginning. Peek the stack and check if it is the ending node, if not it will arbitrarily get the next unvisited neighbor node and push it to the stack. If all neighbors are already visited it will pop the current node in the stack to backtrack. Repeat operation until end node is found or stack is empty.
+    </div>
+
     <section class="hero is-dark has-text-centered p-3">
         <div class="field is-grouped is-grouped-centered">
             <p class="control">
