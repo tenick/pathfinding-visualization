@@ -15,7 +15,7 @@
         <p class="title">Pathfinding Algorithm Visualizer</p>
         <p class="subtitle">Explore the pathfinding algorithms using these functions!</p>
     </section>
-
+    
     <section class="hero is-success has-text-centered">
         <div class="hero-body p-1">
             <div class="container">
@@ -41,6 +41,7 @@
             </div>
         </div>
     </section>
+
     <section class="hero is-info has-text-centered">
         <div class="hero-body p-3">
             <div class="field is-grouped is-grouped-centered">
@@ -69,10 +70,32 @@
             </div>
         </div>
     </section>
-    <section class="is-dark has-text-centered">
-        <canvas id="cvs"></canvas>
+
+    <section class="columns is-centered p-1 mb-0">
+        <div class="column is-half pb-0">
+            <section class="has-text-centered">
+                <canvas id="cvs"></canvas>
+            </section>
+        </div>
+        <div class="column is-2 pb-0">
+            <article class="panel is-primary">
+                <p class="panel-heading">
+                  Algorithm Steps
+                </p>
+                <div class="content p-5" id="frameInfoDiv">
+                    <p>This is where the information for every step of the algorithm is located.</p>
+                    
+                    <!-- sample frameInfoDiv content
+                    <p><b>Iteration:</b> 69</p>
+                    <p><b>Coordinate:</b> row 22 column 5</p>
+                    <p><b>Operation:</b> Queue-ing</p>
+                    <p><b>Description:</b> Mark as visited</p> -->
+                </div>
+              </article>
+        </div>
     </section>
-    <section class="hero is-dark has-text-centered p-4">
+
+    <section class="hero is-dark has-text-centered p-3">
         <div class="field is-grouped is-grouped-centered">
             <p class="control">
                 <a class="button is-static">Speed (ms)</a>
@@ -113,20 +136,18 @@
             </div>
         </div>
     </section>
-    <!-- this is where the information for every step of the algorithm is located -->
-    <div id="frameInfoDiv">
-        <!-- sample frameInfoDiv content
-        <p><b>Iteration:</b> 69</p>
-        <p><b>Coordinate:</b> row 22 column 5</p>
-        <p><b>Operation:</b> Queue-ing</p>
-        <p><b>Description:</b> Mark as visited</p> -->
-    </div>
-    <section class="hero is-link has-text-centered p-">
+
+        <section class="hero is-link has-text-centered p-">
         <div class="content has-text-centered">
             <p>
                 <a href="https://github.com/tenick/pathfinding-visualization.git"><strong>Pathfinding Algorithm Visualizer</strong></a> by <a href="https://github.com/tenick">Kenneth Usares</a> and <a href="https://github.com/rmbernardo27">Reanne Bernardo</a>.
             </p>
         </div>
     </section>
+
+    <a href="#" class="float">
+        <i class="fa-solid fa-circle-question my-float"></i>
+    </a>
+
 </body>
 </html>
