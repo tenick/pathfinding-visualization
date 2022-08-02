@@ -10,8 +10,8 @@
 	height:50px;
 	bottom:30px;
 	right:30px;
-	background-color:#0C9;
-	color:#FFF;
+	background-color:hsl(48, 100%, 67%);
+	color:rgb(0, 0, 0);
 	border-radius:30px;
 	text-align:center;
 	box-shadow: 2px 2px 3px #999;
