@@ -145,9 +145,35 @@
         </div>
     </section>
 
-    <a href="#" class="float">
+    <a id="myBtn" href="#" class="float">
         <i class="fa-solid fa-circle-question my-float"></i>
     </a>
 
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            Hotkey:<br>
+            Home - Go at starting step of algorithm<br>
+            End - Go at ending step of algorithm<br>
+            Left Arrow - Go back 1 algorithm step<br>
+            Right Arrow - Go forward 1 algorithm step<br>
+            Space Bar - Play/Pause the algorithm<br>
+            Left Bracket - Decrease speed (ms) by 10<br>
+            Right Bracket - Increase speed (ms) by 10<br>
+            <br>
+            Note: Hotkey will only work if not currently focused in a Button or Input element, make sure to click on any element that isn't a button or an input for hotkeys to work (e.g. click on the background)<br>
+            <br>
+            Djikstra Node:<br>
+            The number shown in the node means it is the distance from that node to the starting node.<br>
+            <br>
+            A* Node:<br>
+            The top-left number refers to g(n), the distance from that node to the starting node.<br>
+            The bottom-left number refers to h(n), the manhattan distance from that node to the ending node.<br>
+            The big middle number refers to f(n), where f(n) = g(n) + h(n)<br>
+        </div>
+    </div>
 </body>
 </html>
