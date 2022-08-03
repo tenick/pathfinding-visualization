@@ -82,7 +82,7 @@
                 <p class="panel-heading has-background-grey-darker">
                   Algorithim Definition
                 </p>
-                <div class="content p-4">
+                <div id="algorithmDefinitionDiv" class="content p-4">
                     <p>
                         DFS uses a stack data structure to traverse the grid. The starting node will the only node in the stack at the beginning. Peek the stack and check if it is the ending node, if not it will arbitrarily get the next unvisited neighbor node and push it to the stack. If all neighbors are already visited it will pop the current node in the stack to backtrack. Repeat operation until end node is found or stack is empty.
                     </p>
