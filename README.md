@@ -11,3 +11,6 @@
 <li>Dijkstra</li>
 <li>A*</li>
 </ul>
+
+## Demo
+![Pathfinding Algorithm Visualizer Demo](https://github.com/tenick/pathfinding-visualization/blob/master/res/pathFindingVisualizerDemo.gif)
